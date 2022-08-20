@@ -1,14 +1,7 @@
-name: tests
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+name: Module Tests
+on: [push]
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Clone bbot
