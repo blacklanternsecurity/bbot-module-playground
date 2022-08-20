@@ -133,4 +133,3 @@ class sqlmap(BaseModule):
                 del vuln_dict["Type"]
                 del vuln_dict["Title"]
                 del vuln_dict["Payload"]
-
