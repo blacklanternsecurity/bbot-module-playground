@@ -1,5 +1,5 @@
 name: Module Tests
-on: [push]
+on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -11,7 +11,7 @@ jobs:
       - name: Clone bbot-module-playground
         uses: actions/checkout@v3
         with:
-          path: bbot/modules
+          path: bbot/modules/playground
       - name: Install Python 3
         uses: actions/setup-python@v3
         with:
