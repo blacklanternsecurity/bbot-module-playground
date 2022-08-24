@@ -14,6 +14,7 @@ class sqlmap(BaseModule):
         "level": "Level of tests to perform (1-5, default 1)",
         "risk": "Risk of tests to perform (1-3, default 1)",
         "crawl": "Sets the max crawl depth for looking for additional links. 0 will disable the feature.",
+        "tamper": "Use given script(s) for tampering injection data (comma separated)",
     }
 
     in_scope_only = True
@@ -40,6 +41,7 @@ class sqlmap(BaseModule):
         self.level = self.config.get("level", "1")
         self.risk = self.config.get("risk", "1")
         self.smart_mode = self.config.get("smart_mode", True)
+        self.tamper = self.config.get("tamper", "")
 
         self.hugeinfo(self.smart_mode)
         self.hugeinfo(self.crawl)
@@ -68,6 +70,9 @@ class sqlmap(BaseModule):
 
         if self.smart_mode:
             command.append("--smart")
+
+        if self.tamper:
+            command.append(f'--tamper="{self.tamper}"')
 
         # This is really ugly, yes!
         # Why can't there by a json output mode?
@@ -133,4 +138,3 @@ class sqlmap(BaseModule):
                 del vuln_dict["Type"]
                 del vuln_dict["Title"]
                 del vuln_dict["Payload"]
-
