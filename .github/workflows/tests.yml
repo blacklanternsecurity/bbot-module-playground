@@ -1,0 +1,25 @@
+name: Module Tests
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone bbot
+        uses: actions/checkout@v3
+        with:
+          repository: blacklanternsecurity/bbot
+      - name: Clone bbot-module-playground
+        uses: actions/checkout@v3
+        with:
+          path: bbot/modules/playground
+      - name: Install Python 3
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Run tests with pytest
+        run: |
+          poetry run pytest --disable-warnings -k test_modules
