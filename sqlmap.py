@@ -5,7 +5,7 @@ class sqlmap(BaseModule):
 
     watched_events = ["URL"]
     produced_events = ["FINDING", "VULNERABILITY"]
-    flags = ["active", "aggressive", "web", "slow", "brute-force", "deadly"]
+    flags = ["active", "aggressive", "web-advanced", "slow", "brute-force", "deadly"]
     meta = {"description": "Unleash SQLMAP against unsuspecting web applications"}
 
     options = {"smart_mode": True, "level": "1", "risk": "1", "crawl": "2"}
@@ -22,7 +22,10 @@ class sqlmap(BaseModule):
     deps_ansible = [
         {
             "name": "Get SQLMAP repo",
-            "git": {"repo": "https://github.com/sqlmapproject/sqlmap.git", "dest": "{BBOT_TOOLS}/sqlmap"},
+            "git": {
+                "repo": "https://github.com/sqlmapproject/sqlmap.git",
+                "dest": "{BBOT_TOOLS}/sqlmap",
+            },
         }
     ]
 

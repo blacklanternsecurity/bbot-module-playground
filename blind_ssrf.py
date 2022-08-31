@@ -115,7 +115,8 @@ class W3TotalCache(BaseSubmodule):
                 "Type": "SubscriptionConfirmation",
                 "Message": "",
                 "SubscribeURL": "https://SSRF_CANARY".replace(
-                    "SSRF_CANARY", f"{subdomain_tag}.{self.parent_module.interactsh_domain}"
+                    "SSRF_CANARY",
+                    f"{subdomain_tag}.{self.parent_module.interactsh_domain}",
                 ),
             }
             test_url = f"{event.parsed.scheme}://{event.parsed.netloc}{test_path}"
@@ -200,7 +201,10 @@ class PeopleSoftXXE_1(BaseSubmodule):
         for test_path in self.test_paths:
             test_url = f"{event.parsed.scheme}://{event.parsed.netloc}{test_path}"
             r = self.parent_module.helpers.curl(
-                url=test_url, method="POST", raw_data=post_body, headers={"Content-type": "application/xml"}
+                url=test_url,
+                method="POST",
+                raw_data=post_body,
+                headers={"Content-type": "application/xml"},
             )
             if r:
                 self.process(event, r, subdomain_tag)
@@ -217,11 +221,15 @@ class PeopleSoftXXE_2(BaseSubmodule):
 
         for test_path in self.test_paths:
             post_body = """<!DOCTYPE a PUBLIC "-//B/A/EN" "http://SSRF_CANARY">""".replace(
-                "SSRF_CANARY", f"{subdomain_tag}.{self.parent_module.interactsh_domain}"
+                "SSRF_CANARY",
+                f"{subdomain_tag}.{self.parent_module.interactsh_domain}",
             )
             test_url = f"{event.parsed.scheme}://{event.parsed.netloc}{test_path}"
             r = self.parent_module.helpers.curl(
-                url=test_url, method="POST", raw_body=post_body, headers={"Content-type": "application/xml"}
+                url=test_url,
+                method="POST",
+                raw_body=post_body,
+                headers={"Content-type": "application/xml"},
             )
             if r:
                 self.process(event, r, subdomain_tag)
@@ -231,7 +239,7 @@ class blind_ssrf(generic_ssrf):
 
     watched_events = ["URL"]
     produced_events = ["VULNERABILITY"]
-    flags = ["active", "aggressive", "web"]
+    flags = ["active", "aggressive", "web-advanced"]
     meta = {"description": "Check for common blind SSRFs"}
     deps_apt = ["curl"]
 
